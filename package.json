@@ -2,11 +2,8 @@
   "name": "time-race-server",
   "version": "1.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
-    "build": "node ./build.mjs",
-    "start": "node --enable-source-maps ./dist/index.mjs",
-    "dev": "node ./build.mjs && node --enable-source-maps ./dist/index.mjs"
+    "start": "tsx src/index.ts"
   },
   "dependencies": {
     "cookie-parser": "^1.4.7",
@@ -14,14 +11,7 @@
     "express": "^5",
     "pino": "^9",
     "pino-http": "^10",
-    "socket.io": "^4.8.3"
-  },
-  "devDependencies": {
-    "@types/cookie-parser": "^1.4.10",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.6",
-    "@types/node": "^22.0.0",
-    "esbuild": "latest",
-    "typescript": "^5"
+    "socket.io": "^4.8.3",
+    "tsx": "^4"
   }
 }

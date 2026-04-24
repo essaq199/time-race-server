@@ -1,5 +1,5 @@
 [phases.build]
-cmds = ["npm install", "node ./build.mjs"]
+cmds = ["npm install"]
 
 [start]
-cmd = "node --enable-source-maps ./dist/index.cjs"
+cmd = "npx tsx src/index.ts"
