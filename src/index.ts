@@ -5,7 +5,7 @@ import { logger } from "./lib/logger.js";
 
 const rawPort = process.env["PORT"];
 
-const PORT = parseInt(rawPort || "8080", 10);//
+if (!rawPort) {
   throw new Error("PORT environment variable is required but was not provided.");
 }
 
