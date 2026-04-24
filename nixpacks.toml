@@ -2,4 +2,4 @@
 cmds = ["npm install", "node ./build.mjs"]
 
 [start]
-cmd = "node --enable-source-maps ./dist/index.mjs"
+cmd = "node --enable-source-maps ./dist/index.cjs"
