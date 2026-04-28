@@ -61,10 +61,10 @@ app.get("/privacy", (req, res) => {
 <p>يتصل التطبيق بخادمنا فقط لأغراض اللعب الجماعي عبر الإنترنت (إنشاء الغرف والانضمام إليها). لا نحتفظ بأي سجلات لبيانات اللاعبين أو نتائج الألعاب.</p>
 
 <h2>الإعلانات</h2>
-<p>لا يحتوي التطبيق على أي إعلانات.</p>
+<p>قد يعرض التطبيق إعلانات من خلال خدمة Google AdMob. تستخدم هذه الإعلانات معرّف الإعلان (Advertising ID) لتقديم إعلانات مناسبة. يمكنك إيقاف تخصيص الإعلانات من إعدادات جهازك.</p>
 
 <h2>مشاركة البيانات</h2>
-<p>لا نشارك أي بيانات مع أطراف ثالثة تحت أي ظرف.</p>
+<p>لا نشارك بياناتك الشخصية مع أطراف ثالثة، باستثناء مزودي الإعلانات (Google AdMob) وفق سياستهم الخاصة.</p>
 
 <h2>أذونات التطبيق</h2>
 <p>يطلب التطبيق إذن الوصول للإنترنت فقط لتمكين ميزة اللعب الجماعي.</p>
@@ -86,10 +86,10 @@ app.get("/privacy", (req, res) => {
 <p>The app connects to our server solely for online multiplayer functionality (creating and joining rooms). We do not retain any player data or game results.</p>
 
 <h2>Advertisements</h2>
-<p>This app contains no advertisements.</p>
+<p>The app may display advertisements through Google AdMob. These ads may use your device's Advertising ID to show relevant ads. You can opt out of personalized ads in your device settings.</p>
 
 <h2>Data Sharing</h2>
-<p>We do not share any data with third parties under any circumstances.</p>
+<p>We do not share your personal data with third parties, except with advertising providers (Google AdMob) in accordance with their own privacy policy.</p>
 
 <h2>App Permissions</h2>
 <p>The app only requests Internet access permission to enable the multiplayer feature.</p>
