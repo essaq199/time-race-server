@@ -109,4 +109,5 @@ app.get("/privacy", (req, res) => {
 </html>`);
 });
 
+// app-ads.txt verified: pub-6160127047032913
 export default app;
