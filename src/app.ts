@@ -109,5 +109,5 @@ app.get("/privacy", (req, res) => {
 </html>`);
 });
 
-// app-ads.txt verified: pub-6160127047032913
+// AdMob pub-6160127047032913 verified 2026-04-29T14:41:23.984Z
 export default app;
