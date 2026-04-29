@@ -33,6 +33,11 @@ app.get("/", (_req, res) => {
   res.json({ status: "ok" });
 });
 
+app.get("/app-ads.txt", (_req, res) => {
+  res.type("text/plain");
+  res.send("google.com, pub-6160127047032913, DIRECT, f08c47fec0942fa0");
+});
+
 app.use("/api", router);
 
 app.get("/privacy", (req, res) => {
