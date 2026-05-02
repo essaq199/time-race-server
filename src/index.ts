@@ -16,18 +16,25 @@ if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
 
-await initRedis().catch((err: unknown) => {
-  console.warn("Redis init failed — continuing without Redis", err);
-});
+async function main() {
+  await initRedis().catch((err: unknown) => {
+    console.warn("Redis init failed — continuing without Redis", err);
+  });
 
-const httpServer = http.createServer(app);
-initSocket(httpServer);
+  const httpServer = http.createServer(app);
+  initSocket(httpServer);
 
-httpServer.listen(port, () => {
-  logger.info({ port }, "Server listening (HTTP + Socket.io)");
-});
+  httpServer.listen(port, () => {
+    logger.info({ port }, "Server listening (HTTP + Socket.io)");
+  });
 
-httpServer.on("error", (err) => {
-  logger.error({ err }, "Server error");
+  httpServer.on("error", (err) => {
+    logger.error({ err }, "Server error");
+    process.exit(1);
+  });
+}
+
+main().catch((err) => {
+  console.error("Fatal error", err);
   process.exit(1);
 });
