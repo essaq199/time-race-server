@@ -2,6 +2,7 @@ import http from "http";
 import app from "./app.js";
 import { initSocket } from "./socket.js";
 import { logger } from "./lib/logger.js";
+import { initRedis } from "./lib/redis.js";
 
 const rawPort = process.env["PORT"];
 
@@ -14,6 +15,10 @@ const port = Number(rawPort);
 if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
+
+await initRedis().catch((err: unknown) => {
+  console.warn("Redis init failed — continuing without Redis", err);
+});
 
 const httpServer = http.createServer(app);
 initSocket(httpServer);
