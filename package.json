@@ -6,14 +6,20 @@
     "start": "tsx src/index.ts"
   },
   "dependencies": {
+    "@socket.io/redis-adapter": "^8.3.0",
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2",
     "express": "^5",
+    "ioredis": "^5.6.0",
+    "jsonwebtoken": "^9.0.2",
     "pino": "^9",
     "pino-http": "^10",
     "socket.io": "^4.8.3",
-    "tsx": "^4",
-    "ioredis": "^5.6.0",
-"@socket.io/redis-adapter": "^8.3.0"
+    "tsx": "^4"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.9"
   }
 }
