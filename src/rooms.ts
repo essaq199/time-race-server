@@ -184,7 +184,7 @@ export function startGame(room: GameRoom, category: string, language: "ar" | "en
   room.questionIdx = 0;
   room.timers   = [600, 600];
   room.scores   = [0, 0];
-  room.questionIds = buildPool(category, 2);
+  room.questionIds = buildPool(category, 1);
   syncRoom(room);
   return room.questionIds;
 }
