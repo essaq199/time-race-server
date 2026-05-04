@@ -119,3 +119,67 @@ export async function redisQueuePop2(): Promise<[unknown, unknown] | null> {
   if (!a || !b) return null;
   return [JSON.parse(a), JSON.parse(b)];
 }
+
+// ── User / Auth Storage ────────────────────────────────────────────────────────
+const USER_PREFIX = "user:";
+const LB_WINS_KEY = "lb:wins";
+
+export interface UserRecord {
+  username: string;
+  passwordHash: string;
+  wins: number;
+  losses: number;
+  gamesPlayed: number;
+}
+
+export async function redisUserExists(username: string): Promise<boolean> {
+  if (!gameClient) return false;
+  return (await gameClient.exists(`${USER_PREFIX}${username.toLowerCase()}`)) === 1;
+}
+
+export async function redisGetUser(username: string): Promise<UserRecord | null> {
+  if (!gameClient) return null;
+  const raw = await gameClient.get(`${USER_PREFIX}${username.toLowerCase()}`);
+  return raw ? (JSON.parse(raw) as UserRecord) : null;
+}
+
+export async function redisSetUser(username: string, data: UserRecord): Promise<void> {
+  if (!gameClient) return;
+  await gameClient.set(`${USER_PREFIX}${username.toLowerCase()}`, JSON.stringify(data));
+}
+
+export async function redisUpdateUserStats(
+  username: string,
+  won: boolean,
+): Promise<UserRecord | null> {
+  if (!gameClient) return null;
+  const key = `${USER_PREFIX}${username.toLowerCase()}`;
+  const raw = await gameClient.get(key);
+  if (!raw) return null;
+  const user = JSON.parse(raw) as UserRecord;
+  user.gamesPlayed++;
+  if (won) user.wins++; else user.losses++;
+  await Promise.all([
+    gameClient.set(key, JSON.stringify(user)),
+    gameClient.zadd(LB_WINS_KEY, user.wins, username.toLowerCase()),
+  ]);
+  return user;
+}
+
+export async function redisGetLeaderboard(limit = 50): Promise<UserRecord[]> {
+  if (!gameClient) return [];
+  const usernames = await gameClient.zrevrange(LB_WINS_KEY, 0, limit - 1);
+  if (usernames.length === 0) return [];
+  const pipeline = gameClient.pipeline();
+  for (const uname of usernames) pipeline.get(`${USER_PREFIX}${uname}`);
+  const results = await pipeline.exec();
+  const entries: UserRecord[] = [];
+  if (results) {
+    for (const [err, raw] of results) {
+      if (!err && raw) {
+        try { entries.push(JSON.parse(raw as string) as UserRecord); } catch { /* skip */ }
+      }
+    }
+  }
+  return entries;
+}
