@@ -136,7 +136,7 @@ app.get("/", (_req, res) => {
 
 app.get("/app-ads.txt", (_req, res) => {
   res.type("text/plain");
-  res.send("google.com, pub-6160127047032913, DIRECT, f08c47fec0942fa0");
+  res.send("google.com, pub-6160127047032913, DIRECT, f08c47fec0942fa0\nfacebook.com, 2371006853385063, DIRECT, c3e20eee3f780d68");
 });
 
 app.use("/api", router);
